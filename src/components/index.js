@@ -1,3 +1,4 @@
 import Button from "./button";
+import RoomCode from "./room-code";
 
-export { Button };
+export { Button, RoomCode };
