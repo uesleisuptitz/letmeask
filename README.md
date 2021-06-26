@@ -26,6 +26,12 @@ Pelo terminal:
 - Faça o clone do projeto em algum local da sua máquina. Exemplo: `user/projetos`
 - Vá até a pasta que você acabou de clonar. Exemplo: `cd user/projetos/letmeask`
 - Utilizando **npm** ou **yarn**, instale as dependências do projeto. Exemplo: execute o comando `yarn` ou `npm i`
+
+Pelo Firebase Console:
+- Siga [este](https://firebase.google.com/docs/web/setup#prerequisites) tutorial do Firebase para criar seu projeto e obter as credenciais dele
+- Crie um arquivo `.env.local` na raiz do projeto e coloque lá as credenciais conforme requisitado no arquivo `/src/services/firebase.js`
+
+De volta ao terminal:
 - Agora, basta executar `yarn start` ou `npm start` e o projeto vai iniciar no endereço `localhost:3000`
 
 ## Próximas funcionalidades
