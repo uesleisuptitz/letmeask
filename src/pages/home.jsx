@@ -25,6 +25,10 @@ const Home = () => {
         alert("Sala não existe!");
         return;
       }
+      if (roomRef.val().closedAt) {
+        alert("Sala já encerrada!");
+        return;
+      }
       history.push(`rooms/${roomCode}`);
     },
     [roomCode]
