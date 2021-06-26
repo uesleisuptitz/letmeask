@@ -5,9 +5,15 @@ const Question = ({
   children,
   content = "",
   author: { name = "", avatar = "" },
+  isHighlighted = false,
+  isAnswered = false,
 }) => {
   return (
-    <div className="question">
+    <div
+      className={`question ${
+        isAnswered ? "answered" : isHighlighted ? "highlighted" : ""
+      }`}
+    >
       <p>{content}</p>
       <footer>
         <div className="user-info">

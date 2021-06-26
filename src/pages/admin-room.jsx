@@ -12,6 +12,24 @@ const AdminRoom = () => {
   const { id: roomId } = useParams();
   const { questions, roomTitle } = useRoom(roomId);
 
+  const handleCheckQuestionAnswered = useCallback(
+    async (questionId, isAnswered = false) => {
+      await database
+        .ref(`rooms/${roomId}/questions/${questionId}`)
+        .update({ isAnswered: !isAnswered });
+    },
+    [roomId]
+  );
+
+  const handleHighlightQuestion = useCallback(
+    async (questionId, isHighlighted = false) => {
+      await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+        isHighlighted: !isHighlighted,
+      });
+    },
+    [roomId]
+  );
+
   const handleDeleteQuestion = useCallback(
     async (questionId) => {
       if (
@@ -56,13 +74,42 @@ const AdminRoom = () => {
         </div>
 
         <div className="question-list">
-          {questions.map(({ content = "", author = {}, id = "" }) => (
-            <Question content={content} author={author} key={id}>
-              <button type="button" onClick={() => handleDeleteQuestion(id)}>
-                <img src={IMAGES.delete_} alt="Remover pergunta" />
-              </button>
-            </Question>
-          ))}
+          {questions.map(
+            ({
+              content = "",
+              author = {},
+              id = "",
+              isAnswered = false,
+              isHighlighted = false,
+            }) => (
+              <Question
+                content={content}
+                author={author}
+                key={id}
+                isHighlighted={isHighlighted}
+                isAnswered={isAnswered}
+              >
+                <button
+                  type="button"
+                  onClick={() => handleCheckQuestionAnswered(id, isAnswered)}
+                >
+                  <img
+                    src={IMAGES.check}
+                    alt="Marcar pergunta como respondida"
+                  />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleHighlightQuestion(id, isHighlighted)}
+                >
+                  <img src={IMAGES.answer} alt="Destacar pergunta" />
+                </button>
+                <button type="button" onClick={() => handleDeleteQuestion(id)}>
+                  <img src={IMAGES.delete_} alt="Remover pergunta" />
+                </button>
+              </Question>
+            )
+          )}
         </div>
       </main>
     </div>
